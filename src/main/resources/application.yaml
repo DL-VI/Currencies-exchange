@@ -1,0 +1,4 @@
+api:
+  extern:
+    secret-key: ${EXCHANGE_API_KEY}
+    base-url: "https://v6.exchangerate-api.com/v6"
