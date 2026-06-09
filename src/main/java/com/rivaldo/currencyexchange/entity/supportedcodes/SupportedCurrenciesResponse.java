@@ -1,8 +1,8 @@
-package com.rivaldo.currency_exchange.entity;
+package com.rivaldo.currencyexchange.entity.supportedcodes;
 
 import java.util.List;
 
-public record CurrenciesResponse(
+public record SupportedCurrenciesResponse(
         List<CurrencyCodeDto> currencies,
         int totalCurrencies
 ) {

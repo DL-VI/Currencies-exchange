@@ -1,7 +1,8 @@
-package com.rivaldo.currency_exchange.controller;
+package com.rivaldo.currencyexchange.controller;
 
-import com.rivaldo.currency_exchange.entity.CurrenciesResponse;
-import com.rivaldo.currency_exchange.service.CurrencyExchangeService;
+import com.rivaldo.currencyexchange.entity.pairconversion.PairConversionDto;
+import com.rivaldo.currencyexchange.entity.supportedcodes.SupportedCurrenciesResponse;
+import com.rivaldo.currencyexchange.service.CurrencyExchangeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,10 +22,10 @@ public class CurrenciesController {
     }
 
     @GetMapping("/currencies")
-    public ResponseEntity<CurrenciesResponse> getSupportedCurrencies()
+    public ResponseEntity<SupportedCurrenciesResponse> getSupportedCurrencies()
     {
         var response = service.supportedCurrencies();
-        return ResponseEntity.ok(new CurrenciesResponse(
+        return ResponseEntity.ok(new SupportedCurrenciesResponse(
                 response,
                 response.size()
         ));
@@ -35,4 +36,11 @@ public class CurrenciesController {
     {
         return ResponseEntity.ok(service.exchangeRate(currency.toUpperCase()));
     }
+
+    @GetMapping("/pair/{base}/{target}")
+    public ResponseEntity<PairConversionDto> getPairConversion(@PathVariable String base, @PathVariable String target)
+    {
+        return ResponseEntity.ok(service.pairConversion(base, target));
+    }
+
 }

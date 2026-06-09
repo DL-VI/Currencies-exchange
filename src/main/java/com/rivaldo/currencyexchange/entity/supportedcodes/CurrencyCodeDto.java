@@ -1,4 +1,4 @@
-package com.rivaldo.currency_exchange.entity;
+package com.rivaldo.currencyexchange.entity.supportedcodes;
 
 public record CurrencyCodeDto(
         String code,

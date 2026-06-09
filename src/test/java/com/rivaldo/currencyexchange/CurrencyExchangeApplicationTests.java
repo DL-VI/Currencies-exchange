@@ -1,4 +1,4 @@
-package com.rivaldo.currency_exchange;
+package com.rivaldo.currencyexchange;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
