@@ -1,6 +1,6 @@
 package com.rivaldo.currency_exchange.entity;
 
-public record CurrencyDto(
+public record CurrencyCodeDto(
         String code,
         String name
 ) {
