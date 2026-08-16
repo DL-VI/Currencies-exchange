@@ -4,7 +4,6 @@ import com.rivaldo.currencyexchange.entity.api.ApiResponseStatus;
 import com.rivaldo.currencyexchange.entity.api.ExchangeLatestApiResponseStatus;
 import com.rivaldo.currencyexchange.entity.api.PairConversionApiResponseStatus;
 import com.rivaldo.currencyexchange.entity.api.SupportedCodesApiResponseStatus;
-import com.rivaldo.currencyexchange.entity.pairconversion.PairConversionDto;
 import com.rivaldo.currencyexchange.entity.supportedcodes.CurrencyCodeDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -57,20 +56,15 @@ public class CurrencyExchangeService {
         return response.conversionRates();
     }
 
-    public PairConversionDto pairConversion(String base, String target)
+    public BigDecimal pairConversion(BigDecimal amount , String from, String to)
     {
         PairConversionApiResponseStatus response = restClient.get()
-                .uri("/{key}/pair/{base}/{target}", secretKey, base, target)
+                .uri("/{key}/pair/{from}/{to}", secretKey, from, to)
                 .retrieve()
                 .body(PairConversionApiResponseStatus.class);
 
         validateResponse(response);
 
-        return new PairConversionDto(
-                response.timeLastUpdateUtc(),
-                response.baseCode(),
-                response.targetCode(),
-                response.conversionRate()
-        );
+        return amount.multiply(response.conversionRate());
     }
 }
